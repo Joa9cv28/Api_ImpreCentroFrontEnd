@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>index</title>
+	<link href="/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+	<script src="scripts/dependencies.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="styles/index.css">
+
+</head>
+
+<body>
+
+	<div class="header">
+		<a href="index.html"><img src="images/logo.png" alt="CI3D" class="logo"></a>
+		<div class="user-options">
+			<p>
+				<i class="bi bi-person" style="font-size: 25px; vertical-align: middle;"></i>
+				Admin 1
+				<i class="bi bi-caret-down-fill" style="font-size: 18px; vertical-align: middle;"></i>
+			</p>
+			<div class="user-submenu">
+				<a href="configuration.html" class="user-submenu__option">Configuración</a>
+				<a href="login.html" class="user-submenu__option">Salir</a>
+			</div>
+		</div>
+		<div class="configuration">
+			<a href="configuration.html"><i class="bi bi-gear " style="font-size: 30px;"></i></a>
+		</div>
+	</div>
+
+	<div class="sidebar">
+		<a href="users.html" class="sidebar__option"><i class="bi bi-person icon"
+				style="font-size: 25px; vertical-align: middle;"></i>Usuarios</a>
+		<a href="files.html" class="sidebar__option"><i class="bi bi-file-earmark icon"
+				style="font-size: 20px; vertical-align: middle;"></i>Archivos</a>
+	</div>
+
+	<div class="main-content">
+		<div class="upload-file">
+			<button class="upload-button"><i class="bi bi-cloud-upload-fill " style="font-size: 25px;"></i></button>
+			<div class="upload-file__text">
+				<button class="upload-button-2">
+					Subir archivo
+				</button>
+				<p>Cargar archivo .gcode</p>
+			</div>
+		</div>
+
+		<div class="content-files">
+			<h1>Mis archivos</h1>
+
+			<div class="js-show-files files-grid">
+			</div>
+		</div>
+	</div>
+
+	<!-- <script src="data/filesData.js"></script> -->
+	<script src="scripts/index.js"></script>
+
+</body>
+
+</html>

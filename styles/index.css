@@ -1,0 +1,144 @@
+.upload-file {
+    background-color: #1b2a47;
+    border-radius: 5px;
+    justify-content: baseline;
+    display: flex;
+}
+
+.upload-button {
+    padding: 8px 15px;
+    background-color: #152036;
+    margin: 20px 20px 20px 25px;
+    border-radius: 5px;
+    height: 50px;
+    border: none;
+    color: white;
+}
+
+.upload-button-2 {
+    font-weight: 700;
+    font-size: 22px;
+    border: none;
+    color: white;
+    background-color: #1b2a47;
+    text-align: left;
+    padding: 0;
+}
+
+.upload-file__text {
+    margin-top: 20px;
+    margin-bottom: 0;
+    vertical-align: baseline;
+}
+
+.upload-file__text p {
+    font-size: 14px;
+}
+
+.content-files {
+    margin-top: 30px;
+}
+
+.files-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+.file {
+    background-color: #1b2a47;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.file-info {
+    text-decoration: none;
+    color: white;
+}
+
+.file__name {
+    margin-top: 15px;
+}
+
+.file__status,
+.show-file__status {
+    background-color: #152036;
+    display: block;
+    padding: 2px 10px;
+    margin: 0 50px;
+    border-radius: 5px;
+}
+
+.file-image {
+    max-width: 240px;
+}
+
+.show-file {
+    background-color: #1b2a47;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.show-file__info {
+    padding: 20px;
+    background-color: #1b2a47;
+    color: #ffffff;
+    border-radius: 5px;
+    margin: 20px;
+    flex-grow: 1;
+}
+
+
+.show-file__name,
+.show-file__time {}
+
+.show-file__label {
+    margin-bottom: 2px;
+    margin-top: 20px;
+}
+
+.btn-delete-file {
+    width: 100%;
+    margin-top: 30px;
+
+}
+
+@media (max-width: 559.9px) {
+    .files-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 560px) and (max-width: 700px) {
+    .files-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 700.1px) and (max-width: 759.9px) {
+    .files-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 760px) and (max-width: 1054.9px) {
+    .files-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 1055px) and (max-width: 1324.9px) {
+    .files-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 1325px) {
+    .files-grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}

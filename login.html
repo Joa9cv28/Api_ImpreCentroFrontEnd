@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <script src="scripts/dependencies.js"></script>
+    <script src="scripts/md5-min.js"></script>
+    <link href="/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" href="styles/login.css">
+</head>
+
+<body>
+    <div class="main-flex">
+        <div class="main-column">
+            <img src="images/logo.png" alt="CI3D" class="logo">
+            
+            <h1>Iniciar sesión</h1>
+            
+            <div class="form-margin">
+                <div class="form-body">
+                    <form >
+                        <p class="field-title">Correo</p>
+                        <input type="text" placeholder="" name="email" id="email" class="form-control" required>
+                        <p class="caption">Correo institucional</p>
+                        
+                        <p class="field-title">Contraseña</p>
+                        <input type="password" placeholder="" name="password" id="password" class="form-control"
+                        required>
+                        
+                        <button type="button" class="btn btn-success btn-login" onclick="login()">Ingresar</button>
+                        <a class="btn btn-light btn-register" href="register.html">Registrarse</a>
+                    </form>
+                </div>
+            </div>
+            
+            
+            <p>Centro de Impresión 3D - CUCEI</p>
+            
+        </div>
+        
+        
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
+<script src="scripts/login.js"></script>

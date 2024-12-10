@@ -1,0 +1,38 @@
+body {
+    background-color: #152036;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+a {
+    text-decoration: none !important;
+    color: white !important;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+h2 {
+    font-size: 22px;
+}
+
+p {
+    font-size: 18px;
+}
+
+.icon {
+    margin-right: 5px;
+}
+
+.container-body {
+    padding: 20px;
+    background-color: #1b2a47;
+    border-radius: 5px;
+}
+
+.btn-cancel,
+.btn-logout,
+.btn-register {
+    color: black !important;
+}
