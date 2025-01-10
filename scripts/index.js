@@ -5,14 +5,14 @@ function fetchFiles() {
   });
 }
 
-let files
+let files;
 fetchFiles().then(data => {
   files = data.data;
   window.onload = renderMyFiles();
   
   function renderMyFiles() {
     let myFilesHTML = '';
-    
+
     files.forEach((file) => {
       const { arc_fecha, arc_id, arc_nombre, arc_ruta, arc_tiempo } = file;
       
