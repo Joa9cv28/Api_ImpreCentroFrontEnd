@@ -1,3 +1,4 @@
+// Clase para manejar datos de usuario
 class Usuario {
   constructor(correo, password, nombre, codigo) {
     this.usu_correo = correo;
@@ -7,15 +8,22 @@ class Usuario {
   }
 }
 
+// URL base para las solicitudes al servidor
+const API_BASE_URL = "http://127.0.0.1:8000/api";
+
+// Función para registrar un usuario
 function registerUser() {
-  const correo = document.getElementById("student-email").value;
-  const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("password-confirm").value;
-  const nombre = document.getElementById("student-name").value;
-  const codigo = document.getElementById("student-code").value;
+  // Captura los datos del formulario
+  const correo = document.getElementById("student-email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const confirmPassword = document.getElementById("password-confirm").value.trim();
+  const nombre = document.getElementById("student-name").value.trim();
+  const codigo = document.getElementById("student-code").value.trim();
 
-  const Regex = new RegExp("^[a-zA-Z]+\\.[a-zA-Z]+[0-9]+@(alumnos|academicos)\\.udg\\.mx$");
+  // Expresión regular para validar el correo
+  const Regex = /^[a-zA-Z]+\.[a-zA-Z]+[0-9]+@(alumnos|academicos)\.udg\.mx$/;
 
+  // Validaciones
   if (!Regex.test(correo)) {
     Swal.fire({
       title: "Correo inválido",
@@ -36,18 +44,35 @@ function registerUser() {
     return;
   }
 
+  if (!nombre || !codigo) {
+    Swal.fire({
+      title: "Campos incompletos",
+      text: "Por favor, completa todos los campos del formulario.",
+      icon: "warning",
+      confirmButtonText: "Entendido!",
+    });
+    return;
+  }
+
+  // Crear un nuevo usuario
   const md5Password = hex_md5(password);
   const encodedPassword = btoa(md5Password);
   const usuario = new Usuario(correo, encodedPassword, nombre, codigo);
 
-  fetch("http://127.0.0.1:8000/api/usuario", {
+  // Realizar la solicitud POST
+  fetch(`${API_BASE_URL}/usuario`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(usuario),
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error en la respuesta del servidor.");
+      }
+      return response.json();
+    })
     .then((data) => {
       if (data.success) {
         Swal.fire({
@@ -63,7 +88,7 @@ function registerUser() {
       } else {
         Swal.fire({
           title: "Error en el registro",
-          text: data.message,
+          text: data.message || "No se pudo registrar el usuario.",
           icon: "error",
           confirmButtonText: "Entendido!",
         });

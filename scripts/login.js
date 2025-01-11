@@ -1,6 +1,3 @@
-// import { Archivo, Login, Usuario } from './classes.js';
-// import { enviarPOST, enviarPUT } from './requests.js';
-
 class Login{
   constructor(correo,password){
     this.correo = correo;
@@ -31,9 +28,23 @@ function login() {
             text: 'Corrobora la información ingresada',
             icon: 'error',
             confirmButtonText: 'Entendido!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "login.html";
+            }
+          });
+        } else {
+          Swal.fire({
+            title: 'Ingreso exitoso!',
+            text: 'Información válida',
+            icon: 'success',
+            confirmButtonText: 'Entendido!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "index.html";
+            }
           });
         }
-        
       })
       .catch(error => {
           console.error("Error en POST:", error);
