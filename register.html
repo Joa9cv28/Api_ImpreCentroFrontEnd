@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
+  <title>Registrarse - CI3D</title>
   <script src="scripts/dependencies.js"></script>
   <script src="scripts/md5-min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -29,6 +29,8 @@
               <div class="field-column">
                 <p class="field-title">Nombre</p>
                 <input type="text" name="student-name" id="student-name" class="form-control" required>
+                <p class="caption">Nombre Completo</p>
+
               </div>
               <div class="field-column">
                 <p class="field-title">Código de estudiante</p>
@@ -45,6 +47,16 @@
               <div class="field-column">
                 <p class="field-title">Confirmar contraseña</p>
                 <input type="password" name="password-confirm" id="password-confirm" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="upload-file">
+              <div class="upload-file__text">
+                <p>Autenticación con credencial</p>
+                <form action="" class="upload-form">
+                  <input class="upload-button" type="file" id="fileInput" accept=".jpg, .jpeg, .png"/>
+                  <input class="send-button" type="submit" value="Subir" />
+                </form>
               </div>
             </div>
 
