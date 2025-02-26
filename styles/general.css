@@ -36,3 +36,7 @@ p {
 .btn-register {
     color: black !important;
 }
+
+.dataTables_wrapper {
+    overflow-x: scroll;
+}

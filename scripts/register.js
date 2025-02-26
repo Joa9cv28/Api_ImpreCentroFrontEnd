@@ -60,7 +60,7 @@ function registerUser() {
   const usuario = new Usuario(correo, encodedPassword, nombre, codigo);
 
   // Realizar la solicitud POST
-  fetch(`${API_BASE_URL}/usuario`, {
+  fetch(`${API_BASE_URL}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
