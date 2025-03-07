@@ -1,17 +1,19 @@
 // Descargar archivos archivos
-async function fetchFiles() {
-  try {
-    const response = await fetch('http://127.0.0.1:8000/api/archivos');
-    if (!response.ok) throw new Error('Error al obtener los archivos');
-    return await response.json();
-  } catch (error) {
-    console.error('Error en fetchFiles:', error);
-  }
-}
+// async function fetchFiles() {
+//   return
+//   try {
+//     const response = await fetch('http://127.0.0.1:8000/api/archivos');
+//     console.log(response);
+//     if (!response.ok) throw new Error('Error al obtener los archivos');
+//     return await response.json();
+//   } catch (error) {
+//     console.error('Error en fetchFiles:', error);
+//   }
+// }
 document.addEventListener("DOMContentLoaded", async function () {
   try {
-    const filesData = await fetchFiles();
-    if (filesData) renderFiles(filesData.data);
+    // const filesData = await fetchFiles();
+    // if (filesData) renderFiles(filesData.data);
 
     await printDownloadedFilesNames(); // Llamar la función para imprimir los archivos descargados
   } catch (error) {
@@ -100,8 +102,8 @@ document.querySelector('.upload-form')?.addEventListener('submit', async functio
     const response = await uploadFile(file);
     alert(response.message || 'Archivo subido correctamente.');
 
-    const updatedFilesData = await fetchFiles();
-    if (updatedFilesData) renderFiles(updatedFilesData.data);
+    // const updatedFilesData = await fetchFiles();
+    // if (updatedFilesData) renderFiles(updatedFilesData.data);
   } catch (error) {
     console.error('Error al subir el archivo:', error);
     alert('Hubo un problema al subir el archivo.');
