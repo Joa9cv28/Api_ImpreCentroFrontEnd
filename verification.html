@@ -16,6 +16,11 @@
 
     <link rel="stylesheet" href="styles/general.css">
     <link rel="stylesheet" href="styles/verification.css">
+    
+    <!-- Agrega SweetAlert2 (necesario para `Swal`) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="scripts/verification.js" defer></script>
+
 </head>
 
 <body>
@@ -32,17 +37,16 @@
                     <p class="top-text">Por favor, vuelve a ingresar tu código de estudiante y el código que recibiste
                         por correo.</p>
 
-                    <form action="login.html">
+                    <form onsubmit="event.preventDefault(); verifyUser();">
                         <p class="field-title">Código de estudiante</p>
-                        <input type="text" placeholder="" name="studentcode" id="studentcode" class="form-control"
-                            required>
-
+                        <input type="text" name="studentcode" id="studentcode" class="form-control" required>
+                    
                         <p class="field-title">Código de verificación</p>
-                        <input type="text" placeholder="" name="verificationcode" id="verificationcode"
-                            class="form-control" required>
-
+                        <input type="text" name="verificationcode" id="verificationcode" class="form-control" required>
+                    
                         <button type="submit" class="btn btn-success btn-login">Verificar</button>
                     </form>
+                        
                 </div>
             </div>
 
