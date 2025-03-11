@@ -83,8 +83,8 @@ function mostrarAlerta(titulo, mensaje, icono, callback = null) {
     icon: icono,
     confirmButtonText: "Entendido!",
   }).then((result) => {
-    if (result.isConfirmed && callback) {
-      callback();
+    if (result.isConfirmed) {
+      window.location.href = "/verification.html";
     }
   });
 }
