@@ -14,12 +14,60 @@ document.addEventListener("DOMContentLoaded", async function () {
   try {
     // const filesData = await fetchFiles();
     // if (filesData) renderFiles(filesData.data);
-
+    await checkToken(); // Verificar el token al cargar la página
     await printDownloadedFilesNames(); // Llamar la función para imprimir los archivos descargados
   } catch (error) {
     console.error('Error al cargar archivos en DOMContentLoaded:', error);
   }
 });
+
+async function checkToken() {
+  const token = localStorage.getItem('access_token');
+  if (!token) {
+    alert('No tienes acceso a esta página. Por favor, inicia sesión.');
+    window.location.href = 'login.html';
+  } else {
+    const isValid = await checkTokenBack(token);
+    if (!isValid) {
+      alert('Token inválido. Por favor, inicia sesión nuevamente.');
+      localStorage.removeItem('access_token');
+      window.location.href = 'login.html';
+    } else {
+      console.log('Token válido:', token);
+    }
+  }
+}
+
+async function checkTokenBack(token) {
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/validate-token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ token })
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al validar el token');
+    }
+
+    const data = await response.json();
+
+    if (data.valid) {
+      console.log('Token válido:', data.valid);
+      return true;
+    } else {
+      console.log('Token inválido:', data.valid);
+      return false;
+    }
+
+  } catch (error) {
+    console.error('Error en checkTokenBack:', error);
+    return false;
+  }
+}
 
 // Imprimir archivos
 async function fetchDownloadedFiles() {
