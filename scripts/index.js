@@ -31,6 +31,7 @@ async function checkToken() {
     if (!isValid) {
       alert('Token inválido. Por favor, inicia sesión nuevamente.');
       localStorage.removeItem('access_token');
+      localStorage.removeItem('user_data');
       window.location.href = 'login.html';
     } else {
       console.log('Token válido:', token);
@@ -55,8 +56,9 @@ async function checkTokenBack(token) {
 
     const data = await response.json();
 
-    if (data.valid) {
-      console.log('Token válido:', data.valid);
+    if (data.valid && data.valid === true) {
+      console.log('Token válido:', data );
+      localStorage.setItem('user_data', JSON.stringify(data.user));
       return true;
     } else {
       console.log('Token inválido:', data.valid);
@@ -210,4 +212,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 */
+
+// Funcion para salir de la sesion
+document.querySelector('.js-logout')?.addEventListener('click', function (e) {
+  e.preventDefault();
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('user_data');
+  window.location.href = 'login.html';
+});
 
