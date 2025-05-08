@@ -97,15 +97,18 @@ async function printDownloadedFilesNames() {
 
     // Crear un bloque de HTML con los nombres de los archivos
     let filesHTML = '';
+    let countPrintTime = 0; // BORRAR - priniting time
     downloadedData.files.forEach(fileName => {
+      countPrintTime += hashNumber(fileName);
 
       filesHTML += `
       <div class="file">
-          <a href="" class="file-info">
-            <h2 class="file__name">${fileName}</h2>
+          <a href="documents/${fileName}" class="file-info" download>
+            <h2 class="file__name">${fileName.split('/')[1]}</h2>
+            <p class="">Usuario: ${fileName.split('/')[0]}</p>
             <p class="file__status">En espera</p>
             <img src="images/modelado-3d-3.png" alt="" class="file-image">
-            <h2 class="file__date">Fecha: 25/01/2025</h2>
+            <h2 class="file__date">Fecha: ${calcPrintingDate(countPrintTime)}</h2>
           </a>
         </div>
       `;
@@ -117,6 +120,38 @@ async function printDownloadedFilesNames() {
     console.error("Error al imprimir los nombres de los archivos descargados:", error);
   }
 }
+
+// --- BORRAR ---
+  // Función para generar un número entre el 15 y el 180 con su hash
+  function hashNumber(cadena, min = 15, max = 320) {
+    let hash = 0;
+    for (let i = 0; i < cadena.length; i++) {
+        hash = cadena.charCodeAt(i) + ((hash << 5) - hash);
+        hash = hash & hash; // Convertir a 32 bits
+    }
+
+    const rango = max - min + 1;
+    const numeroPositivo = Math.abs(hash);
+    const resultado = (numeroPositivo % rango) + min;
+
+    return resultado;
+  }
+
+  // --- Borrar ---
+  // Función para calcular la fecha de impresión según los minutos de las impresiones anteriores
+  function calcPrintingDate(minutos) {
+	const minutosPorDia = 360;
+	const diasASumar = Math.floor(minutos / minutosPorDia) + 1;
+
+	const fecha = new Date();
+	fecha.setDate(fecha.getDate() + diasASumar);
+
+	const dia = String(fecha.getDate()).padStart(2, '0');
+	const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
+	const anio = fecha.getFullYear();
+
+	return `${dia}/${mes}/${anio}`;
+  }
 
 // Subir archivos
 async function uploadFile(file) {

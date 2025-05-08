@@ -22,8 +22,6 @@ $(document).ready( function(){
           	<td>${usu_nombre}</td>
           	<td>${usu_correo}</td>
           	<td>${usu_codigo}</td>
-            <td>3</td>
-            <td>TRUE</td>
         	</tr>
           `;
 			});
