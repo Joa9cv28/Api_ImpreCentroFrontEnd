@@ -1,11 +1,43 @@
+function getStudentCodeFromToken() {
+	const token = localStorage.getItem("access_token");
+	if (!token) return null;
+	try {
+	  const payload = JSON.parse(atob(token.split(".")[1]));
+	  return payload["cognito:username"] || payload["username"];  // según cómo venga en Cognito
+	} catch (e) {
+	  console.error("Error decodificando el token:", e);
+	  return null;
+	}
+  }
+const data = async ()=> {
+	const student_code = getStudentCodeFromToken();
+  if (!student_code) {
+    console.error("No se pudo obtener el student_code.");
+    return;
+  }
+
+	try {
+		const response = await fetch(`http://127.0.0.1:8000/api/download-all/${student_code}`);
+		if (!response.ok) throw new Error('Error al obtener los archivos');
+		return await response.json();
+	} catch (error) {
+		console.error('Error en fetchFiles:', error);
+	}
+  }
 // Descargar archivos archivos
 async function fetchFiles() {
+	const student_code = getStudentCodeFromToken();
+  if (!student_code) {
+    console.error("No se pudo obtener el student_code.");
+    return;
+  }
+
 	try {
-	  const response = await fetch('http://127.0.0.1:8000/api/archivos');
-	  if (!response.ok) throw new Error('Error al obtener los archivos');
-	  return await response.json();
+		const response = await fetch(`http://127.0.0.1:8000/api/download-all/${student_code}`);
+		if (!response.ok) throw new Error('Error al obtener los archivos');
+		return await response.json();
 	} catch (error) {
-	  console.error('Error en fetchFiles:', error);
+		console.error('Error en fetchFiles:', error);
 	}
   }
   document.addEventListener("DOMContentLoaded", async function () {
@@ -22,7 +54,7 @@ async function fetchFiles() {
   // Imprimir archivos
   async function fetchDownloadedFiles() {
 	try {
-	  const response = await fetch('http://127.0.0.1:8000/api/download-all');
+	  const response = await fetch(`http://127.0.0.1:8000/api/download-all/${student_code}`);
 	  if (!response.ok) throw new Error('Error al obtener los archivos descargados');
 	  return await response.json();
 	} catch (error) {
@@ -31,7 +63,7 @@ async function fetchFiles() {
   }
   async function printDownloadedFilesNames() {
 	try {
-	  const downloadedData = await fetchDownloadedFiles();
+	  const downloadedData = await fetchFiles();
 	  if (!downloadedData || !downloadedData.files) {
 		console.error("No se encontraron archivos descargados.");
 		return;

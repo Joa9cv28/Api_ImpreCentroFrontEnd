@@ -21,6 +21,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
+function getStudentCodeFromToken() {
+  const token = localStorage.getItem("access_token");
+  if (!token) return null;
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload["cognito:username"] || payload["username"];  // según cómo venga en Cognito
+  } catch (e) {
+    console.error("Error decodificando el token:", e);
+    return null;
+  }
+}
+
 async function checkToken() {
   const token = localStorage.getItem('access_token');
   if (!token) {
@@ -73,14 +85,21 @@ async function checkTokenBack(token) {
 
 // Imprimir archivos
 async function fetchDownloadedFiles() {
+  const student_code = getStudentCodeFromToken();
+  if (!student_code) {
+    console.error("No se pudo obtener el student_code.");
+    return;
+  }
+
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/download-all');
+    const response = await fetch(`http://127.0.0.1:8000/api/download-all/${student_code}`);
     if (!response.ok) throw new Error('Error al obtener los archivos descargados');
     return await response.json();
   } catch (error) {
     console.error('Error en fetchDownloadedFiles:', error);
   }
 }
+
 async function printDownloadedFilesNames() {
   try {
     const downloadedData = await fetchDownloadedFiles();
@@ -97,12 +116,13 @@ async function printDownloadedFilesNames() {
 
     // Crear un bloque de HTML con los nombres de los archivos
     let filesHTML = '';
-    downloadedData.files.forEach(fileName => {
-
+    downloadedData.files
+    .filter(fileName => !fileName.endsWith("/")) // 👈 filtrar carpetas
+    .forEach(fileName => {
       filesHTML += `
       <div class="file">
           <a href="" class="file-info">
-            <h2 class="file__name">${fileName}</h2>
+            <h2 class="file__name">${fileName.split('/').pop()}</h2>
             <p class="file__status">En espera</p>
             <img src="images/modelado-3d-3.png" alt="" class="file-image">
             <h2 class="file__date">Fecha: 25/01/2025</h2>
@@ -120,23 +140,29 @@ async function printDownloadedFilesNames() {
 
 // Subir archivos
 async function uploadFile(file) {
+  const student_code = getStudentCodeFromToken();
+  if (!student_code) {
+    alert("No se encontró el código del estudiante. Inicia sesión nuevamente.");
+    return;
+  }
+
   const formData = new FormData();
   formData.append("file", file);
 
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/upload', {
+    const response = await fetch(`http://127.0.0.1:8000/api/upload/${student_code}`, {
       method: 'POST',
       body: formData,
     });
 
     if (!response.ok) throw new Error('Error al subir el archivo');
-
     return await response.json();
   } catch (error) {
     console.error('Error en uploadFile:', error);
     throw error;
   }
 }
+
 document.querySelector('.upload-form')?.addEventListener('submit', async function (e) {  
   e.preventDefault();
 
