@@ -1,4 +1,6 @@
 $(document).ready( function(){
+
+	document.querySelector('.user-name').textContent = localStorage.getItem("user_name");
 	
 	function fetchFiles() {
 		return $.ajax({

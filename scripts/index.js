@@ -58,6 +58,8 @@ async function checkTokenBack(token) {
 
     if (data.valid && data.valid === true) {
       console.log('Token válido:', data );
+      localStorage.setItem("user_name", data['user']['UserAttributes'][2].Value);
+      document.querySelector('.user-name').textContent = localStorage.getItem("user_name");
       localStorage.setItem('user_data', JSON.stringify(data.user));
       return true;
     } else {

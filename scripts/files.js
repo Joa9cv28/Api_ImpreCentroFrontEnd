@@ -1,3 +1,7 @@
+$(document).ready( function(){
+	document.querySelector('.user-name').textContent = localStorage.getItem("user_name");
+  });
+
 // Descargar archivos archivos
 async function fetchFiles() {
 	try {
@@ -100,6 +104,7 @@ async function fetchFiles() {
 	return `${dia}/${mes}/${anio}`;
   }
 
+ 
 /*
 $(document).ready( function(){
 	

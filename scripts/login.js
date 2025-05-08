@@ -62,6 +62,7 @@ function login() {
       icon: 'success',
       confirmButtonText: 'Continuar'
     }).then(() => {
+      localStorage.setItem("user_email", email);
       window.location.href = "index.html";
     });
   })
