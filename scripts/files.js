@@ -54,7 +54,7 @@ async function fetchFiles() {
 			<td>D:\joani\batimovil.gcode</td>
 			<td>156</td>
 			<td>04/02/2025</td>
-			<td>1</td>
+			<td>${fileName.split('/')[0]}</td>
 			<td>En espera</td>
 		  </tr>
 		`;
