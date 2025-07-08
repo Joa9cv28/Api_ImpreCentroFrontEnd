@@ -1,15 +1,3 @@
-// Descargar archivos archivos
-// async function fetchFiles() {
-//   return
-//   try {
-//     const response = await fetch('http://127.0.0.1:8000/api/archivos');
-//     console.log(response);
-//     if (!response.ok) throw new Error('Error al obtener los archivos');
-//     return await response.json();
-//   } catch (error) {
-//     console.error('Error en fetchFiles:', error);
-//   }
-// }
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     // const filesData = await fetchFiles();
@@ -123,38 +111,6 @@ async function printDownloadedFilesNames() {
   }
 }
 
-// --- BORRAR ---
-  // Función para generar un número entre el 15 y el 180 con su hash
-  function hashNumber(cadena, min = 15, max = 320) {
-    let hash = 0;
-    for (let i = 0; i < cadena.length; i++) {
-        hash = cadena.charCodeAt(i) + ((hash << 5) - hash);
-        hash = hash & hash; // Convertir a 32 bits
-    }
-
-    const rango = max - min + 1;
-    const numeroPositivo = Math.abs(hash);
-    const resultado = (numeroPositivo % rango) + min;
-
-    return resultado;
-  }
-
-  // --- Borrar ---
-  // Función para calcular la fecha de impresión según los minutos de las impresiones anteriores
-  function calcPrintingDate(minutos) {
-	const minutosPorDia = 360;
-	const diasASumar = Math.floor(minutos / minutosPorDia) + 1;
-
-	const fecha = new Date();
-	fecha.setDate(fecha.getDate() + diasASumar);
-
-	const dia = String(fecha.getDate()).padStart(2, '0');
-	const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
-	const anio = fecha.getFullYear();
-
-	return `${dia}/${mes}/${anio}`;
-  }
-
 // Subir archivos
 async function uploadFile(file) {
   const formData = new FormData();
@@ -196,59 +152,6 @@ document.querySelector('.upload-form')?.addEventListener('submit', async functio
     alert('Hubo un problema al subir el archivo.');
   }
 });
-
-
-// Formato anterior para cargar archivos
-/*
-function renderFiles(files) {
-  let myFilesHTML = '';
-
-  files.forEach((file) => {
-    const { arc_fecha, arc_id, arc_nombre, arc_ruta, arc_tiempo } = file;
-
-    let imagen = 'modelado-3d-1';
-    if (arc_tiempo > 120) imagen = 'modelado-3d-3';
-    else if (arc_tiempo > 60) imagen = 'modelado-3d-2';
-
-    myFilesHTML += `
-      <div class="file js-file-${arc_id}">
-        <a href="http://127.0.0.1:8000/api/static-files/${arc_nombre}" class="file-info" download>
-          <h2 class="file__name">${arc_nombre}</h2>
-          <p class="file__status">Descargado</p>
-          <img src="images/${imagen}.png" alt="" class="file-image">
-          <h2 class="file__date">Fecha: ${arc_fecha}</h2>
-        </a>
-      </div>
-    `;
-  });
-
-  const fileContainer = document.querySelector('.js-show-files');
-  if (fileContainer) {
-    fileContainer.innerHTML = myFilesHTML;
-  } else {
-    console.error("No se encontró el contenedor '.js-show-files' en el HTML.");
-  }
-}
-*/
-
-// Imprimir en consola los archivos descargados
-/*
-document.addEventListener("DOMContentLoaded", async function () {
-  
-  try {
-    const filesData = await fetchFiles();
-    if (filesData) renderFiles(filesData.data);
-
-    const downloadedData = await fetchDownloadedFiles();
-    if (downloadedData) {
-      alert(downloadedData.message);
-      console.log('Archivos descargados:', downloadedData.files);
-    }
-  } catch (error) {
-    console.error('Error al cargar archivos en DOMContentLoaded:', error);
-  }
-});
-*/
 
 // Funcion para salir de la sesion
 document.querySelector('.js-logout')?.addEventListener('click', function (e) {

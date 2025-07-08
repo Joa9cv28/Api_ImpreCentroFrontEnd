@@ -30,7 +30,7 @@ $(document).ready( function(){
 			document.querySelector('#tbody_id').innerHTML = myFilesHTML; //Se obtiene la referencia de una etiqueta en html basado en ID
 			$('#table_id').DataTable(); //Se inicializa el DataTable (despues de cargar informacion)
 		}
-		// Esto funcionará correctamente
+
 	}).catch(error => {
 		console.error('Hubo un problema con la solicitud:', error);
 	});
