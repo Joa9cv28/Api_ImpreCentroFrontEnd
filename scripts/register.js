@@ -59,6 +59,7 @@ async function registerUser() {
       body: formData, // Envía el FormData directamente
     });
 
+
     const data = await response.json();
 
     if (!response.ok) {
@@ -67,6 +68,7 @@ async function registerUser() {
 
     mostrarAlerta("Registro exitoso", data.message, "success", () => {
       window.location.href = "login.html"; // Redirigir al login después de registrar
+
     });
 
   } catch (error) {
