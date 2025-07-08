@@ -1,4 +1,6 @@
 $(document).ready( function(){
+
+	document.querySelector('.user-name').textContent = localStorage.getItem("user_name");
 	
 	function fetchFiles() {
 		return $.ajax({
@@ -22,15 +24,13 @@ $(document).ready( function(){
           	<td>${usu_nombre}</td>
           	<td>${usu_correo}</td>
           	<td>${usu_codigo}</td>
-            <td>3</td>
-            <td>TRUE</td>
         	</tr>
           `;
 			});
 			document.querySelector('#tbody_id').innerHTML = myFilesHTML; //Se obtiene la referencia de una etiqueta en html basado en ID
 			$('#table_id').DataTable(); //Se inicializa el DataTable (despues de cargar informacion)
 		}
-		// Esto funcionará correctamente
+
 	}).catch(error => {
 		console.error('Hubo un problema con la solicitud:', error);
 	});

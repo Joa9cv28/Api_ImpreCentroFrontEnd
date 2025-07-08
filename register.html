@@ -9,7 +9,7 @@
   <script src="scripts/md5-min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link href="/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/register.css">
 </head>
 
@@ -20,7 +20,7 @@
       <h1>Crear cuenta</h1>
       <div class="form-margin">
         <div class="form-body">
-          <form>
+          <form onsubmit="event.preventDefault(); registerUser();">
             <p class="field-title">Correo</p>
             <input type="email" name="student-email" id="student-email" class="form-control" required>
             <p class="caption">Correo institucional</p>
@@ -30,7 +30,6 @@
                 <p class="field-title">Nombre</p>
                 <input type="text" name="student-name" id="student-name" class="form-control" required>
                 <p class="caption">Nombre Completo</p>
-
               </div>
               <div class="field-column">
                 <p class="field-title">Código de estudiante</p>
@@ -53,14 +52,11 @@
             <div class="upload-file">
               <div class="upload-file__text">
                 <p>Autenticación con credencial</p>
-                <form action="" class="upload-form">
-                  <input class="upload-button" type="file" id="fileInput" accept=".jpg, .jpeg, .png"/>
-                  <input class="send-button" type="submit" value="Subir" />
-                </form>
+                <input class="upload-button" type="file" id="student-credential" accept=".jpg, .jpeg, .png" required/>
               </div>
             </div>
 
-            <button type="button" class="btn btn-success btn-login" onclick="registerUser()">Registrar</button>
+            <button type="submit" class="btn btn-success btn-login">Registrar</button>
             <a class="btn btn-light btn-cancel" href="login.html">Cancelar</a>
           </form>
         </div>
